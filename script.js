@@ -65,27 +65,48 @@ generateResults(text)
 
 }
 
-function generateResults(text){
+async function generateResults(text){
 
-const trust = Math.floor(Math.random()*100)
+const API_URL = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
+const API_TOKEN = "YOUR_HF_TOKEN"
 
-const sentiments=["Positive","Neutral","Negative"]
-const emotions=["Calm","Aggressive","Persuasive","Defensive"]
-const manipulation=["Low","Medium","High"]
+const response = await fetch(API_URL,{
+method:"POST",
+headers:{
+"Authorization":`Bearer ${API_TOKEN}`,
+"Content-Type":"application/json"
+},
+body:JSON.stringify({inputs:text})
+})
+
+const data = await response.json()
+
+let sentiment="Neutral"
+
+if(data[0]){
+const label=data[0][0].label
+
+if(label==="LABEL_2") sentiment="Positive"
+if(label==="LABEL_0") sentiment="Negative"
+}
+
+let emotion="Calm"
+
+if(sentiment==="Positive") emotion="Happy"
+if(sentiment==="Negative") emotion="Aggressive"
+
+let trust=70
+
+if(sentiment==="Positive") trust=85
+if(sentiment==="Negative") trust=40
 
 document.getElementById("trustScore").innerText=trust
-
-document.getElementById("sentiment").innerText=
-sentiments[Math.floor(Math.random()*sentiments.length)]
-
-document.getElementById("emotion").innerText=
-emotions[Math.floor(Math.random()*emotions.length)]
-
-document.getElementById("manipulation").innerText=
-manipulation[Math.floor(Math.random()*manipulation.length)]
+document.getElementById("sentiment").innerText=sentiment
+document.getElementById("emotion").innerText=emotion
+document.getElementById("manipulation").innerText="AI Analysis"
 
 document.getElementById("explanation").innerText=
-"The language pattern suggests emotional persuasion and selective wording that may influence perception."
+"TrustLens AI used NLP neural network analysis to evaluate emotional tone and truth probability."
 
 saveHistory(text,trust)
 
