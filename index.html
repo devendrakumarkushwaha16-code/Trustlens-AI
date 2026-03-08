@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrustLens AI</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+<div class="terminal">
+<p id="terminal-text"></p>
+<span class="cursor">|</span>
+</div>
+</div>
+
+<!-- Main Website -->
+<div id="main-content" style="display:none;">
+
+<header>
+<h1>TrustLens AI</h1>
+<p class="tagline">Decode Truth. Detect Intent.</p>
+<button id="enterBtn">ENTER THE SYSTEM</button>
+</header>
+
+<section id="analyzer">
+
+<h2>AI Trust Scanner</h2>
+
+<textarea id="inputText" placeholder="Paste a message, tweet, or statement..."></textarea>
+
+<button id="scanBtn">RUN TRUST SCAN</button>
+
+<div id="scanStatus"></div>
+
+</section>
+
+<section id="results">
+
+<h2>Analysis Results</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Trust Score</h3>
+<div id="trustScore">0</div>
+</div>
+
+<div class="card">
+<h3>Sentiment</h3>
+<p id="sentiment"></p>
+</div>
+
+<div class="card">
+<h3>Manipulation Risk</h3>
+<p id="manipulation"></p>
+</div>
+
+<div class="card">
+<h3>Emotional Tone</h3>
+<p id="emotion"></p>
+</div>
+
+<div class="card wide">
+<h3>AI Explanation</h3>
+<p id="explanation"></p>
+</div>
+
+</div>
+
+</section>
+
+<section id="history">
+
+<h2>Scan History</h2>
+
+<div id="historyList"></div>
+
+</section>
+
+<footer>
+
+<p>The truth always leaves a trace.</p>
+
+</footer>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
